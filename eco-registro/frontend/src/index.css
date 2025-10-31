@@ -1,68 +1,171 @@
-:root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
-
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 body {
-  margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, #f0fdf4 0%, #e0f2fe 100%);
   min-height: 100vh;
 }
 
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+.eco-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
 }
 
-button {
+.eco-header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.eco-title {
+  font-size: 2.5rem;
+  color: #166534;
+  margin-bottom: 10px;
+}
+
+.eco-card {
+  background: white;
+  border-radius: 10px;
+  padding: 20px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.eco-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 15px;
+  margin-top: 15px;
+}
+
+.eco-stat-card {
+  padding: 15px;
   border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+  text-align: center;
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
+.eco-stat-total {
+  background: #dcfce7;
+  border: 2px solid #bbf7d0;
+}
+
+.eco-stat-item {
+  background: #f0f9ff;
+  border: 2px solid #bae6fd;
+}
+
+.eco-form-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 15px;
+  align-items: end;
+}
+
+.eco-input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #d1d5db;
+  border-radius: 5px;
+  font-size: 1rem;
+}
+
+.eco-input:focus {
+  outline: none;
+  border-color: #16a34a;
+  box-shadow: 0 0 0 3px rgba(22, 163, 74, 0.1);
+}
+
+.eco-btn {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.eco-btn-primary {
+  background: #16a34a;
+  color: white;
+}
+
+.eco-btn-primary:hover {
+  background: #15803d;
+}
+
+.eco-btn-secondary {
+  background: #3b82f6;
+  color: white;
+}
+
+.eco-btn-secondary:hover {
+  background: #2563eb;
+}
+
+.eco-btn-danger {
+  background: #ef4444;
+  color: white;
+  padding: 5px 10px;
+  font-size: 0.875rem;
+}
+
+.eco-btn-danger:hover {
+  background: #dc2626;
+}
+
+.eco-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+}
+
+.eco-table th,
+.eco-table td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.eco-table th {
+  background: #f9fafb;
+  font-weight: 600;
+}
+
+.eco-badge {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.badge-plastico {
+  background: #fef3c7;
+  color: #92400e;
+}
+
+.badge-papel {
+  background: #dbeafe;
+  color: #1e40af;
+}
+
+.badge-vidrio {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.badge-metal {
+  background: #e5e7eb;
+  color: #374151;
+}
+
+.eco-footer {
+  text-align: center;
+  margin-top: 30px;
+  color: #6b7280;
+  font-size: 0.875rem;
 }

@@ -1,11 +1,12 @@
-import RecyclingList from "./components/RecyclingList";
+import RecyclingList from './components/RecyclingList'
+import './index.css'
 
 function App() {
   return (
-    <div className="bg-gray-200 min-h-screen">
+    <div>
       <RecyclingList />
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
