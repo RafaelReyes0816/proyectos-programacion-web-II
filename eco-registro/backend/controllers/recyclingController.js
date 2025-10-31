@@ -19,6 +19,12 @@ export const RecyclingController = {
 
   deleteRecord: (req, res) => {
     const { id } = req.params;
+    const record = RecyclingModel.findById(id);
+    
+    if (!record) {
+      return res.status(404).json({ error: "Registro no encontrado" });
+    }
+    
     RecyclingModel.delete(id);
     res.json({ message: "Registro eliminado correctamente" });
   }

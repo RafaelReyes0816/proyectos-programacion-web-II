@@ -3,6 +3,10 @@ let recyclingRecords = [];
 export const RecyclingModel = {
   getAll: () => recyclingRecords,
 
+  findById: (id) => {
+    return recyclingRecords.find(record => record.id === Number(id));
+  },
+
   create: (tipo, cantidad) => {
     const newRecord = {
       id: Date.now(),
@@ -14,6 +18,10 @@ export const RecyclingModel = {
   },
 
   delete: (id) => {
+    const record = recyclingRecords.find(record => record.id === Number(id));
+    if (!record) return false;
+    
     recyclingRecords = recyclingRecords.filter(record => record.id !== Number(id));
+    return true;
   }
 };
