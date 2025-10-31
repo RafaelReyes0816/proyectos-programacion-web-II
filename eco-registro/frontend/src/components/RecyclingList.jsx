@@ -54,7 +54,9 @@ export default function RecyclingList() {
     }
 
     try {
-      await axios.post(API_URL, nuevoRegistro);
+      // Asegurar que la cantidad se envíe como número
+      const payload = { ...nuevoRegistro, cantidad: Number(nuevoRegistro.cantidad) };
+      await axios.post(API_URL, payload);
       setNuevoRegistro({ tipo: "Plástico", cantidad: "" });
       // Pequeño delay para asegurar que el archivo se guardó antes de recargar
       setTimeout(() => {

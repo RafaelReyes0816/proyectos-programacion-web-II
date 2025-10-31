@@ -1,11 +1,12 @@
-import HabitList from "./components/HabitList";
+import HabitList from './components/HabitList'
+import './index.css'
 
 function App() {
   return (
-    <div className="bg-green-50 min-h-screen">
+    <div>
       <HabitList />
     </div>
-  );
+  )
 }
 
-export default App;
+export default App

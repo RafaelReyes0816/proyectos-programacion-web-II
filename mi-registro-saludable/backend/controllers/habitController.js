@@ -4,7 +4,20 @@ export const HabitController = {
   getHabits: (req, res) => {
     try {
       const habits = HabitModel.getAll();
-      res.json(habits);
+
+      // Calcular estadísticas básicas para el frontend
+      const total = Array.isArray(habits) ? habits.length : 0;
+      const cumplidos = Array.isArray(habits) ? habits.filter(h => h.cumplido).length : 0;
+      const porcentaje = total === 0 ? 0 : Math.round((cumplidos / total) * 100);
+
+      res.json({
+        habits: habits || [],
+        estadisticas: {
+          total,
+          cumplidos,
+          porcentaje
+        }
+      });
     } catch (error) {
       console.error("Error en getHabits:", error);
       res.status(500).json({ error: "Error al obtener los hábitos" });
@@ -13,15 +26,26 @@ export const HabitController = {
 
   addHabit: (req, res) => {
     try {
+      console.log('Recibido POST /api/habits con body:', req.body);
+      
       const { nombre } = req.body;
       if (!nombre || nombre.trim() === "") {
+        console.log('Error: nombre vacío');
         return res.status(400).json({ error: "El nombre es requerido" });
       }
+
+      console.log('Creando hábito con nombre:', nombre);
       const newHabit = HabitModel.create(nombre.trim());
+      
+      console.log('Hábito creado:', newHabit);
       res.status(201).json(newHabit);
     } catch (error) {
       console.error("Error en addHabit:", error);
-      res.status(500).json({ error: "Error al agregar el hábito" });
+      console.error("Stack:", error.stack);
+      res.status(500).json({ 
+        error: "Error al agregar el hábito",
+        details: error.message 
+      });
     }
   },
 
