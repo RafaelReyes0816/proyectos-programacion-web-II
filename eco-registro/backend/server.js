@@ -10,4 +10,4 @@ app.use(bodyParser.json());
 app.use("/api/recycling", recyclingRoutes);
 
 const PORT = 4000;
-app.listen(PORT, () => console.log(`Servidor "Eco Reciclaje" corriendo en http://localhost:${PORT}`));
+app.listen(PORT, () => console.log(`Servidor Eco Reciclaje corriendo en http://localhost:${PORT}`));

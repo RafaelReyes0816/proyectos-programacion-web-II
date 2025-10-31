@@ -16,12 +16,33 @@ export default function RecyclingList() {
   const fetchRegistros = async () => {
     try {
       const response = await axios.get(API_URL);
-      setRegistros(response.data.registros);
-      setTotalesPorTipo(response.data.totalesPorTipo);
-      setTotalGeneral(response.data.totalGeneral);
+      // Validar que la respuesta tenga la estructura correcta
+      if (response.data && Array.isArray(response.data.registros)) {
+        setRegistros(response.data.registros || []);
+        setTotalesPorTipo(response.data.totalesPorTipo || {});
+        setTotalGeneral(response.data.totalGeneral || 0);
+      } else {
+        // Si viene solo un array (respuesta antigua), manejarlo
+        if (Array.isArray(response.data)) {
+          setRegistros(response.data);
+          setTotalesPorTipo({});
+          setTotalGeneral(0);
+        } else {
+          setRegistros([]);
+          setTotalesPorTipo({});
+          setTotalGeneral(0);
+        }
+      }
     } catch (error) {
       console.error("Error al obtener registros:", error);
-      alert("Error al cargar los registros. Asegúrate que el backend esté ejecutándose en http://localhost:4000");
+      // Solo mostrar alerta si es un error de conexión
+      if (error.code === 'ECONNREFUSED' || error.message.includes('Network Error')) {
+        alert("Error al cargar los registros. Asegúrate que el backend esté ejecutándose en http://localhost:4000");
+      }
+      // En caso de otros errores, mantener los datos actuales
+      setRegistros([]);
+      setTotalesPorTipo({});
+      setTotalGeneral(0);
     }
   };
 
@@ -35,7 +56,10 @@ export default function RecyclingList() {
     try {
       await axios.post(API_URL, nuevoRegistro);
       setNuevoRegistro({ tipo: "Plástico", cantidad: "" });
-      fetchRegistros();
+      // Pequeño delay para asegurar que el archivo se guardó antes de recargar
+      setTimeout(() => {
+        fetchRegistros();
+      }, 100);
       alert("✅ Registro agregado exitosamente!");
     } catch (error) {
       console.error("Error al agregar registro:", error);
@@ -197,7 +221,7 @@ export default function RecyclingList() {
                       {registro.cantidad} kg
                     </td>
                     <td>
-                      {new Date(registro.fecha).toLocaleDateString('es-ES')}
+                      {new Date(registro.id).toLocaleDateString('es-ES')}
                     </td>
                     <td>
                       <button

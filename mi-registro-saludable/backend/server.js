@@ -11,5 +11,5 @@ app.use("/api/habits", habitRoutes);
 
 const PORT = 4000;
 app.listen(PORT, () =>
-  console.log(`Servidor "Mi Registro Saludable" corriendo en http://localhost:${PORT}`)
+  console.log(`Servidor Mi Registro Saludable corriendo en http://localhost:${PORT}`)
 );
