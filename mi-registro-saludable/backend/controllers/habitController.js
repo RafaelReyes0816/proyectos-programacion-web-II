@@ -14,12 +14,24 @@ export const HabitController = {
 
   toggleHabit: (req, res) => {
     const { id } = req.params;
-    HabitModel.toggle(id);
-    res.json({ message: "Estado del hábito actualizado" });
+    const habit = HabitModel.findById(id);
+    
+    if (!habit) {
+      return res.status(404).json({ error: "Hábito no encontrado" });
+    }
+    
+    const updatedHabit = HabitModel.toggle(id);
+    res.json(updatedHabit);
   },
 
   deleteHabit: (req, res) => {
     const { id } = req.params;
+    const habit = HabitModel.findById(id);
+    
+    if (!habit) {
+      return res.status(404).json({ error: "Hábito no encontrado" });
+    }
+    
     HabitModel.delete(id);
     res.json({ message: "Hábito eliminado" });
   }
